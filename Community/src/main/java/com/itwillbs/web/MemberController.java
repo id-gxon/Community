@@ -1,6 +1,7 @@
 package com.itwillbs.web;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,5 +46,40 @@ public class MemberController {
 
 		// 3. 페이지 이동(로그인 페이지 - GET)
 		return "redirect:/member/login";
+	}
+
+	// 로그인 - GET
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public void memberLoginGET() {
+		logger.debug("login.jsp - memberLoginGET() 호출");
+		logger.debug("/member/login.jsp 연결");
+	}
+
+	// 로그인 - POST
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String memberLoginPOST(MemberVO vo, HttpSession session/* ,
+																	@ModelAttribute("userid") String userid,
+																	@RequestParam("userpw") String userpw */) {
+		logger.debug("login.jsp - memberLoginPOST() 호출");
+		logger.debug("로그인 vo: " + vo);
+
+		MemberVO resultVO = mService.memberLogin(vo);
+
+		String addr = "";
+
+		if (resultVO == null) {
+			logger.debug("로그인 실패!");
+
+			addr = "/member/login";
+		} else {
+			logger.debug("로그인 성공");
+
+			// 로그인 성공한 계정 정보를 세션에 저장
+			session.setAttribute("id", resultVO.getUserid());
+
+			addr = "/member/main";
+		}
+
+		return "redirect:" + addr;
 	}
 }
