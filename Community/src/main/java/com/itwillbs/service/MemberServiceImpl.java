@@ -53,4 +53,12 @@ public class MemberServiceImpl implements MemberService {
 		return mdao.getMember(userid);
 	}
 
+	// 회원정보 수정
+	@Override
+	public int memberUpdate(MemberVO vo) {
+		logger.debug("S: memberUpdate(MemberVO vo) 실행");
+		logger.debug("S: DAO 회원정보 수정 동작 호출");
+
+		return mdao.updateMember(vo);
+	}
 }

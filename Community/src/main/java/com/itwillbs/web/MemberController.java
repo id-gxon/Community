@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -119,4 +120,37 @@ public class MemberController {
 
 		model.addAttribute(mService.memberInfo(userid));
 	}
+
+	// 회원정보 수정 - GET
+	@GetMapping(value = "/update")
+	public void memberUpdateGET(Model model, HttpSession session) {
+		logger.debug("memberUpdateGET() 실행");
+		logger.debug("Update.jsp 이동");
+
+		String userid = (String) session.getAttribute("id");
+		logger.debug("userid: " + userid);
+
+		model.addAttribute(mService.memberInfo(userid));
+	}
+
+	// 회원정보 수정 - POST
+	@PostMapping(value = "/update")
+	public String memberUpdatePost(MemberVO vo) {
+		logger.debug("memberUpdatePOST() 실행");
+
+		logger.debug("수정할 정보: " + vo);
+
+		int result = mService.memberUpdate(vo);
+
+		logger.debug("result: " + result);
+
+		String attr = "/member/update";
+
+		if (result == 1) {
+			attr = "/member/main";
+		}
+
+		return "redirect:" + attr;
+	}
+
 }
