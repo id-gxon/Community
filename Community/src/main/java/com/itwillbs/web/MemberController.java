@@ -182,4 +182,20 @@ public class MemberController {
 		return "redirect:" + attr;
 	}
 
+	// 회원목록 조회 - GET
+	@GetMapping(value = "/list")
+	public String memberListGET(Model model, HttpSession session) {
+		logger.debug("memberListGET() 실행");
+
+		if (((String) session.getAttribute("id")) == null || !((String) session.getAttribute("id")).equals("admin")) {
+			logger.debug((String) session.getAttribute("id"));
+			return "redirect:/member/main";
+		}
+
+		logger.debug("list.jsp 이동");
+
+		model.addAttribute(mService.getMemberList());
+
+		return "/member/list";
+	}
 }
