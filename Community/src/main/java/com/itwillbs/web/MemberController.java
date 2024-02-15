@@ -153,4 +153,33 @@ public class MemberController {
 		return "redirect:" + attr;
 	}
 
+	// 회원정보 삭제 - GET
+	@GetMapping(value = "/delete")
+	public void memberDeleteGET() {
+		logger.debug("memberDeleteGET() 실행");
+		logger.debug("delete.jsp 이동");
+	}
+
+	// 회원정보 삭제 - POST
+	@PostMapping(value = "/delete")
+	public String memberDeletePOST(MemberVO vo, HttpSession session) {
+		logger.debug("memberUpdatePOST() 실행");
+
+		logger.debug("삭제할 정보: " + vo);
+
+		int result = mService.memberDelete(vo);
+
+		logger.debug("result: " + result);
+
+		String attr = "/member/delete";
+
+		if (result == 1) {
+			attr = "/member/main";
+
+			session.invalidate();
+		}
+
+		return "redirect:" + attr;
+	}
+
 }
