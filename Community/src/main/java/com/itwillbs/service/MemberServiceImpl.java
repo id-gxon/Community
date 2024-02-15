@@ -44,4 +44,13 @@ public class MemberServiceImpl implements MemberService {
 		return resultVO;
 	}
 
+	// 회원정보 조회
+	@Override
+	public MemberVO memberInfo(String userid) {
+		logger.debug("S: memberInfo(String userid) 실행");
+		logger.debug("S: DAO 회원정보 조회 동작 호출");
+
+		return mdao.getMember(userid);
+	}
+
 }
