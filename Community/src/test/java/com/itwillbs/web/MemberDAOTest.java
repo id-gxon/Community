@@ -44,7 +44,7 @@ public class MemberDAOTest {
 		logger.debug("회원가입 완료");
 	}
 
-	// @Test
+	@Test
 	public void 로그인테스트1() {
 		logger.debug("로그인테스트1() 실행");
 
@@ -123,7 +123,7 @@ public class MemberDAOTest {
 		}
 	}
 
-	@Test
+	// @Test
 	public void 회원목록조회() {
 		logger.debug("회원목록조회() 실행");
 
