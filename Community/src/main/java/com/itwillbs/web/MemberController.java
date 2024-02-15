@@ -48,6 +48,7 @@ public class MemberController {
 		return "redirect:/member/login";
 	}
 
+	// http://localhost:8088/member/login
 	// 로그인 - GET
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public void memberLoginGET() {
@@ -81,5 +82,15 @@ public class MemberController {
 		}
 
 		return "redirect:" + addr;
+	}
+
+	// http://localhost:8088/member/main
+	// main page - GET
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	public String memberMainGET(HttpSession session) {
+		logger.debug("memberMainGET() 실행");
+		logger.debug("main.jsp 이동");
+
+		return "/member/main";
 	}
 }
