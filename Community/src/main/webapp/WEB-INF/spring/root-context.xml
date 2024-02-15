@@ -35,5 +35,8 @@
 	
 	<!-- com.itwillbs.persistence 패키지에 컴포넌트(객체)를 찾기 -->
 	<context:component-scan base-package="com.itwillbs.persistence"></context:component-scan>
+	
+	<!-- com.itwillbs.service 패키지에 컴포넌트(객체)를 찾기 -->
+	<context:component-scan base-package="com.itwillbs.service"></context:component-scan>
 
 </beans>
